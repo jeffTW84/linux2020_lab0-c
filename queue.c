@@ -12,11 +12,12 @@
 queue_t *q_new()
 {
     queue_t *q = malloc(sizeof(queue_t));
-    if (q != NULL) {
-        q->head = NULL;
-        q->tail = NULL;
-        q->size = 0;
-    }
+    if (!q)
+        return NULL;
+    memset(q, 0, sizeof(queue_t));
+    q->head = NULL;
+    q->tail = NULL;
+    q->size = 0;
     return q;
 }
 
@@ -29,7 +30,8 @@ void q_free(queue_t *q)
         list_ele_t *temp;
         temp = q->head;
         q->head = q->head->next;
-        free(temp->value);
+        if (temp->value != NULL)
+            free(temp->value);
         free(temp);
     }
     free(q);
@@ -94,10 +96,10 @@ bool q_insert_tail(queue_t *q, char *s)
     if (!q->head) {
         q->head = newt;
         q->tail = newt;
-        return true;
+    } else {
+        q->tail->next = newt;
+        q->tail = newt;
     }
-    q->tail->next = newt;
-    q->tail = newt;
     return true;
 }
 
