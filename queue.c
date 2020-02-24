@@ -24,16 +24,8 @@ queue_t *q_new()
 /* Free all storage used by queue */
 void q_free(queue_t *q)
 {
-    if (!q)
-        return;
-    while (q->head) {
-        list_ele_t *temp;
-        temp = q->head;
-        q->head = q->head->next;
-        if (temp->value != NULL)
-            free(temp->value);
-        free(temp);
-    }
+    while(q_remove_head(q,NULL,0))
+        ;
     free(q);
 }
 
