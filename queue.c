@@ -188,13 +188,32 @@ list_ele_t *merge(list_ele_t *l1, list_ele_t *l2)
     if (!l1)
         return l2;
 
+    list_ele_t *tmp;
     if (strcmp(l1->value, l2->value) < 0) {
-        l1->next = merge(l1->next, l2);
-        return l1;
+        tmp = l1;
+        l1 = l1->next;
     } else {
-        l2->next = merge(l1, l2->next);
-        return l2;
+        tmp = l2;
+        l2 = l2->next;
     }
+
+    list_ele_t *final = tmp;
+    while (l1 != NULL && l2 != NULL) {
+        if (strcmp(l1->value, l2->value) < 0) {
+            tmp->next = l1;
+            l1 = l1->next;
+        } else {
+            tmp->next = l2;
+            l2 = l2->next;
+        }
+        tmp = tmp->next;
+        tmp->next = NULL;
+    }
+    if (l1)
+        tmp->next = l1;
+    if (l2)
+        tmp->next = l2;
+    return final;
 }
 
 list_ele_t *mergeSortList(list_ele_t *head)

@@ -62,7 +62,7 @@ $ make valgrind
 
 Extra options can be recognized by make:
 * `VERBOSE`: control the build verbosity. If `VERBOSE=1`, echo eacho command in build process.
-* `SANITIER`: enable sanitizer(s) directed build. At the moment, AddressSanitizer is supported.
+* `SANITIZER`: enable sanitizer(s) directed build. At the moment, AddressSanitizer is supported.
 
 ## Using qtest
 
@@ -101,3 +101,7 @@ Trace files
 
 `lab0-c`is released under the BSD 2 clause license. Use of this source code is governed by
 a BSD-style license that can be found in the LICENSE file.
+
+External source code:
+* [dudect](https://github.com/oreparaz/dudect): public domain
+* [git-good-commit](https://github.com/tommarshall/git-good-commit): MIT License
